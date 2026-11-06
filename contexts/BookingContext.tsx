@@ -23,3 +23,13 @@ const INITIAL_STATE: BookingState = {
   time: null,
   notes: "",
 }
+
+// アクションのデータ型
+export type BookingAction =
+  | { type: "select-menu"; menuId: string }
+  | { type: "select-staff"; staffId: string | null }
+  | { type: "select-date"; date: string }
+  | { type: "select-time"; time: string }
+  | { type: "change-notes"; notes: string }
+  | { type: "next" }
+  | { type: "prev" }
