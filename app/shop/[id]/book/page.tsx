@@ -22,7 +22,7 @@ export default async function BookingPage({ params }: BookingPageProps) {
             <SectionHeading
                 eyebrow="Booking"
                 title={`${shop.name} の予約`}
-            description="メニュー・スタッフ・日時を選んで予約します。"
+                description="メニュー・スタッフ・日時を選んで予約します。"
             />
 
             <BookingForm />
