@@ -25,6 +25,7 @@ export default function BookingForm({ shop, menus, staffs }: BookingFormProps) {
 }
 
 function BookingFlow() {
+  // useContext を使って BookingContext の状態 state と dispatch を取得
   const { state, dispatch } = useBooking()
 
   return (
