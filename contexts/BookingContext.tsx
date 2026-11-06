@@ -43,12 +43,16 @@ export function canGoNext(state: BookingState): boolean {
 function bookingReducer(state: BookingState, action: BookingAction): BookingState {
   switch (action.type) {
     case "select-menu":
+      // Menu IDを選択して、状態に反映する
       return { ...state, menuId: action.menuId }
     case "select-staff":
+      // Staff IDを選択して、状態に反映する
       return { ...state, staffId: action.staffId }
     case "select-date":
+      // Dateを選択して、状態に反映する
       return { ...state, date: action.date }
     case "select-time":
+      // Timeを選択して、状態に反映する
       return { ...state, time: action.time }
     case "change-notes":
       return { ...state, notes: action.notes }
