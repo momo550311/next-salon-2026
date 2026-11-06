@@ -1,6 +1,6 @@
 // "use client"
 import SectionHeading from '@/components/SectionHeading';
-import { getShop } from '@/lib/services/shops';
+import { getShop, getMenus, getStaffs } from '@/lib/services/shops'; 
 import { notFound } from 'next/navigation';
 // useState を使えるようにする場合は、"use client" を有効にする必要があります。
 // import { useState } from 'react'
@@ -13,9 +13,13 @@ type BookingPageProps = {
 };
 
 export default async function BookingPage({ params }: BookingPageProps) {
+    // URL パラメータから店舗 ID を取得
     const { id } = await params;
+    // APIから店舗情報を取得
     const shop = await getShop(id)
     if (!shop) notFound()
+    // APIからメニューとスタッフ情報を取得
+    const [menus, staffs] = await Promise.all([getMenus(id), getStaffs(id)])
 
     return (
         <div>
@@ -25,7 +29,7 @@ export default async function BookingPage({ params }: BookingPageProps) {
                 description="メニュー・スタッフ・日時を選んで予約します。"
             />
 
-            <BookingForm />
+            <BookingForm shop={shop} menus={menus} staffs={staffs} />
         </div>
     )
 }
