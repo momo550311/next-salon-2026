@@ -33,3 +33,29 @@ export type BookingAction =
   | { type: "change-notes"; notes: string }
   | { type: "next" }
   | { type: "prev" }
+
+// 「次へ」を押せるか（条件は、あとで追加する）
+export function canGoNext(state: BookingState): boolean {
+  return state.step <= TOTAL_STEPS
+}
+
+// Reducer関数
+function bookingReducer(state: BookingState, action: BookingAction): BookingState {
+  switch (action.type) {
+    case "select-menu":
+      return { ...state, menuId: action.menuId }
+    case "select-staff":
+      return { ...state, staffId: action.staffId }
+    case "select-date":
+      return { ...state, date: action.date }
+    case "select-time":
+      return { ...state, time: action.time }
+    case "change-notes":
+      return { ...state, notes: action.notes }
+    case "next":
+      if (!canGoNext(state)) return state
+      return { ...state, step: Math.min(state.step + 1, TOTAL_STEPS) }
+    case "prev":
+      return { ...state, step: Math.max(state.step - 1, 1) }
+  }
+}
